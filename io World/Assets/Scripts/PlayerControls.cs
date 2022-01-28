@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;  
+using UnityEngine.SceneManagement;
 
 public class PlayerControls : MonoBehaviour
 {
@@ -19,6 +20,12 @@ public class PlayerControls : MonoBehaviour
     void FixedUpdate()
     {
         transform.position += moveVal * moveSpeed * Time.deltaTime;
+    }
+
+    void OnRestart()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 
     void OnMove(InputValue value)

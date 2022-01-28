@@ -29,13 +29,7 @@ public class buttonController : MonoBehaviour
         if (coll.gameObject.name == "button")
         {
             buttonMode mode = button.GetComponent<buttonMode>();
-            SpriteRenderer sprite = button.GetComponent<SpriteRenderer>();
-            float scaleMin = .3f;
-
             mode.activate();
-            sprite.color = Color.blue;
-            button.transform.localScale = new Vector3(1.2f,scaleMin,1);
-
 
             if(!mode.active) {
                 this.platformMoving = true;

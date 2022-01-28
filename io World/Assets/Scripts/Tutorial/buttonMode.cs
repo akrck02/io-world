@@ -6,15 +6,28 @@ public class buttonMode : MonoBehaviour
 {
 
     public bool active = false;
+    public Sprite on,off;
+    public GameObject button;
 
     public void toggle()
     {
-        active = !active;
+        if(active) deactivate();
+        else activate();
+        
     }
 
     public void activate()
     {
         this.active = true;
+        SpriteRenderer sprite = button.GetComponent<SpriteRenderer>();
+        sprite.sprite = on;
+    }
+
+    public void deactivate()
+    {
+        this.active = false;
+        SpriteRenderer sprite = button.GetComponent<SpriteRenderer>();
+        sprite.sprite = off;
     }
 
 

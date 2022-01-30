@@ -11,11 +11,15 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] float moveSpeed;
 
     public SpriteRenderer body, eyes, tail1, tail2;
+    public Rigidbody2D rigibody;
+    public bool grounded;
+    public AudioSource jumpSound;
 
     // Start is called before the first frame update
     void Start()
     {
-        this.moveSpeed = 10f;
+        this.moveSpeed = 15f;
+        this.grounded = true;
     }
 
     // Update is called once per frame
@@ -32,7 +36,9 @@ public class PlayerControls : MonoBehaviour
             MoveRight();
         }
 
-        transform.position += moveVal * moveSpeed * Time.deltaTime;
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+        rigibody.AddForce(new Vector2(moveVal.x, 0) * moveSpeed);
+        
     }
  
     void OnRestart()
@@ -100,7 +106,12 @@ public class PlayerControls : MonoBehaviour
     }
 
     void OnJump(){
-        moveVal.y = 1f;
+        moveVal.y = 30f;
+        this.grounded = false;
+    
+        jumpSound.Play();
+        rigibody.AddForce(new Vector2(0, moveVal.y) * moveSpeed);
+
     }
 
 }

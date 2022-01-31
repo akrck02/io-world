@@ -14,6 +14,7 @@ public class PlayerControls : MonoBehaviour
     public Rigidbody2D rigibody;
     public bool grounded;
     public AudioSource jumpSound;
+    public LevelLoader levelLoader;
 
     // Start is called before the first frame update
     void Start()
@@ -112,6 +113,17 @@ public class PlayerControls : MonoBehaviour
         jumpSound.Play();
         rigibody.AddForce(new Vector2(0, moveVal.y) * moveSpeed);
 
+    }
+
+
+  void OnCollisionEnter2D(Collision2D coll)
+    {
+        print(coll.gameObject.tag);
+
+        if (coll.gameObject.tag == "end")
+        {
+            levelLoader.LoadNextLevel();
+        }
     }
 
 }

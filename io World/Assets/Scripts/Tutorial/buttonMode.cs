@@ -8,6 +8,7 @@ public class buttonMode : MonoBehaviour
     public bool active = false;
     public Sprite on,off;
     public GameObject button;
+    public Animation onAnimation,offAnimation;
 
     public void toggle()
     {

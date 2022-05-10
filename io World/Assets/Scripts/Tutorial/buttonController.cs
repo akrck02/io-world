@@ -26,7 +26,7 @@ public class buttonController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D coll)
     {
         print(coll.gameObject.name);
-        if (coll.gameObject.name == "button")
+        if (coll.gameObject.name == "ball")
         {
             buttonMode mode = button.GetComponent<buttonMode>();
             mode.activate();

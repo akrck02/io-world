@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4813310244892210894}
   - component: {fileID: 4621160106377942091}
   m_Layer: 0
-  m_Name: button
+  m_Name: buttonSpriteBundle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -35,8 +35,7 @@ public class PlayerControls : MonoBehaviour
     void FixedUpdate()
     {
         transform.rotation = Quaternion.Euler(0, 0, 0);
-        rigibody.velocity =
-            new Vector2(horizontal * moveSpeed, rigibody.velocity.y);
+        rigibody.velocity = new Vector2(horizontal * moveSpeed, rigibody.velocity.y);
 
         if (horizontal > 0)
         {

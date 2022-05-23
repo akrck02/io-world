@@ -73,8 +73,7 @@ public class PlayerControls : MonoBehaviour
         }
         if (context.canceled && rigibody.velocity.y > 0)
         {
-            rigibody.velocity =
-                new Vector2(rigibody.velocity.x, rigibody.velocity.y / 2);
+            rigibody.velocity = new Vector2(rigibody.velocity.x, rigibody.velocity.y / 2);
             jumpSound.Play();
         }
     }
@@ -116,10 +115,8 @@ public class PlayerControls : MonoBehaviour
         if (tail1X < body.transform.position.x -.05f) 
             tail1X = body.transform.position.x -.05f;
 
-        if (tail2X < body.transform.position.x -.1f) 
-            tail2X = body.transform.position.x -.1f;
-
-
+        if (tail2X < body.transform.position.x -.15f) 
+            tail2X = body.transform.position.x -.15f;
 
         if (eyesX < body.transform.position.x - .13f) 
             eyesX = body.transform.position.x - .13f;
@@ -127,8 +124,8 @@ public class PlayerControls : MonoBehaviour
         if (tail1X > body.transform.position.x +.05f) 
             tail1X = body.transform.position.x +.05f;
 
-        if (tail2X > body.transform.position.x +.1f) 
-            tail2X = body.transform.position.x +.1f;
+        if (tail2X > body.transform.position.x +.15f) 
+            tail2X = body.transform.position.x +.15f;
 
         Vector3 eyesTarget =
             new Vector3(eyesX,

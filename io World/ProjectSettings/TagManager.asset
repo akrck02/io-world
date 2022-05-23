@@ -4,7 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - end
+  - Magnet-focus
   layers:
   - Default
   - TransparentFX
@@ -13,7 +13,7 @@ TagManager:
   - Water
   - UI
   - 
-  - 
+  - Magnet
   - Ground
   - 
   - 

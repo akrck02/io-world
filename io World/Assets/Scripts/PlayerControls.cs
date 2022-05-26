@@ -65,7 +65,7 @@ public class PlayerControls : MonoBehaviour
     */
     public void Jump(InputAction.CallbackContext context)
     {
-        print("jump");
+       
         if (context.performed && IsGrounded())
         {
             rigibody.velocity = new Vector2(rigibody.velocity.x, jumpPower);
@@ -74,7 +74,7 @@ public class PlayerControls : MonoBehaviour
         if (context.canceled && rigibody.velocity.y > 0)
         {
             rigibody.velocity = new Vector2(rigibody.velocity.x, rigibody.velocity.y / 2);
-            jumpSound.Play();
+           // jumpSound.Play();
         }
     }
 

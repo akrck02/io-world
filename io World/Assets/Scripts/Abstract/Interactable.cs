@@ -17,6 +17,8 @@ public abstract class Interactable : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.GetComponent<PlayerController>().OpenInteactableIcon();
+            OnInteractionRangeEnter(other);
+
         }
     }
 
@@ -25,6 +27,16 @@ public abstract class Interactable : MonoBehaviour
         if (other.CompareTag("Player"))
         {
              other.GetComponent<PlayerController>().CloseInteactableIcon();
+             OnInteractionRangeExit(other);
         }
+    }
+
+
+    private void OnInteractionRangeEnter(Collider2D other) {
+
+    }
+
+    private void OnInteractionRangeExit(Collider2D other) {
+
     }
 }

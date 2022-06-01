@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &73946408 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7038240527226414118, guid: 36bcfadcb86354943bb578def49b3a03, type: 3}
+  m_PrefabInstance: {fileID: 7038240528356660913}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &75515054
 GameObject:
   m_ObjectHideFlags: 0
@@ -3241,24 +3246,36 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7038240527226414121, guid: 36bcfadcb86354943bb578def49b3a03, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 73946408}
+    - target: {fileID: 7038240527226414121, guid: 36bcfadcb86354943bb578def49b3a03, type: 3}
       propertyPath: interactIcon
       value: 
       objectReference: {fileID: 1187981668}
+    - target: {fileID: 7038240527226414123, guid: 36bcfadcb86354943bb578def49b3a03, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7038240527226414125, guid: 36bcfadcb86354943bb578def49b3a03, type: 3}
       propertyPath: rigibody
       value: 
       objectReference: {fileID: 171236390537309517, guid: 36bcfadcb86354943bb578def49b3a03, type: 3}
+    - target: {fileID: 7038240527306123847, guid: 36bcfadcb86354943bb578def49b3a03, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.15
+      objectReference: {fileID: 0}
     - target: {fileID: 7038240527306123849, guid: 36bcfadcb86354943bb578def49b3a03, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7038240527306123849, guid: 36bcfadcb86354943bb578def49b3a03, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.22
+      value: 1.73
       objectReference: {fileID: 0}
     - target: {fileID: 7038240527306123849, guid: 36bcfadcb86354943bb578def49b3a03, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.44
+      value: -3.07
       objectReference: {fileID: 0}
     - target: {fileID: 7038240527306123849, guid: 36bcfadcb86354943bb578def49b3a03, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3301,6 +3318,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4924706048474079146, guid: 422c1f8e04e72510f923835a5d70d2df, type: 3}
+      propertyPath: m_Density
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8232527723399107421, guid: 422c1f8e04e72510f923835a5d70d2df, type: 3}
       propertyPath: holder
       value: 
@@ -3353,5 +3374,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Magnet
       objectReference: {fileID: 0}
+    - target: {fileID: 8232527724242365022, guid: 422c1f8e04e72510f923835a5d70d2df, type: 3}
+      propertyPath: holder
+      value: 
+      objectReference: {fileID: 1997978167}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 422c1f8e04e72510f923835a5d70d2df, type: 3}

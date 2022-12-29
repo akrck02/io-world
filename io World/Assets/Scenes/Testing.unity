@@ -2887,6 +2887,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4254673477402425111, guid: 53a0d68bf8a201e9da6a43110571be36, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4254673477402425111, guid: 53a0d68bf8a201e9da6a43110571be36, type: 3}
       propertyPath: m_EdgeRadius
       value: 0
       objectReference: {fileID: 0}

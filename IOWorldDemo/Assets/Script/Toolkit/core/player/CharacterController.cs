@@ -109,9 +109,6 @@ public class CharacterController : MonoBehaviour
     }
 
     public void OnMove(InputAction.CallbackContext context) {
-        
-    
-        Debug.Log("Moving");
 
         // Get vector from input
         Vector2 input = context.ReadValue<Vector2>();
@@ -129,7 +126,6 @@ public class CharacterController : MonoBehaviour
 
             // if the player is grounded and the jump button is pressed within the jump time
             if (isGrounded && Time.time - lastJumpPressed < jumpTime) {
-                Debug.Log("Jumping");
                 rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
                 lastJump = Time.time;
                 animationController.JumpSound();
@@ -138,7 +134,6 @@ public class CharacterController : MonoBehaviour
 
             // if double jump is available and the jump button is pressed within the jump time
             if(doubleJump && Time.time - lastJumpPressed < jumpTime){
-                Debug.Log("Double Jumping");
                 doubleJump = false;
                 rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
                 lastJump = Time.time;

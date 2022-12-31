@@ -8,8 +8,8 @@ public abstract class ButtonData
     public SpriteRenderer SpriteRenderer;
     public Rigidbody2D Rigidbody2D;
     public BoxCollider2D BoxCollider2D;
-
-    public ButtonData(ButtonClick parent) {
+    
+    public ButtonData(GameObject parent) {
         
         this.Transform = parent.GetComponent<Transform>();
         this.SpriteRenderer = parent.GetComponent<SpriteRenderer>();

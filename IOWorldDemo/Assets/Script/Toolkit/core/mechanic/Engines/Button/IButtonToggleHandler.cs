@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
   
   
-public interface IButtonClickHandler {
+public interface IButtonToggleHandler {
    
-    void Activate();
+    void on();
+    void off();
 
 }

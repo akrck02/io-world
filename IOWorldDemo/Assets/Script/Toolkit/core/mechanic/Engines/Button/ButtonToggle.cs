@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
+using System;
 
-public class ButtonClick : MonoBehaviour
+public class ButtonToggle : MonoBehaviour
 {
 
     private readonly bool DEFAULT_STARTED = false;
     public bool started; 
-    public IButtonClickHandler handler;
+    public IButtonToggleHandler handler;
+
     public string[] supportedTags = {"Magnet", "Player"};
 
 
@@ -49,17 +50,38 @@ public class ButtonClick : MonoBehaviour
             mayActivate = true;
         }
 
+
         if(mayActivate && !this.started){
-            this.Activate();
+            this.on();
+        } 
+    }
+
+    void OnCollisionExit2D(Collision2D coll) {
+
+        bool mayDeactivate = false;
+
+        if(coll.gameObject.name == "Player"){
+            mayDeactivate = true;
         }
+
+        if(mayDeactivate && this.started){
+            this.off();
+        }
+
     }
 
 
-
-    void Activate() {
+    void on() {
         
-        this.handler.Activate();
+        this.handler.on();
         this.started = true;
+
+    }
+
+    void off() {
+        
+        this.handler.off();
+        this.started = false;
 
     }
 

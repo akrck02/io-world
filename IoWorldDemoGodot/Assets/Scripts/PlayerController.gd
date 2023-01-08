@@ -10,30 +10,31 @@ const gravity = 150;
 var isGravityAffecting = true;
 var motion = Vector2();
 
+var impulseY = 0;
 
-func _physics_process(delta):
 
-	## If gravity was canceled	
+func _physics_process(_delta):
+	
+	## If scene reset
+	if Input.is_action_pressed("ui_reset"):
+		var _ok = get_tree().reload_current_scene();
+
+	## If gravity was not canceled	
 	if(isGravityAffecting):
 		motion.y += gravity;	
 	
 	var friction = false;
 	
-	## Right movemente
+	## Right movement
 	if Input.is_action_pressed("ui_right"):
-		## sprite.flip_h = true;
-		## animationPlayer.play("Walk");
 		motion.x = min(motion.x + moveSpeed, maxSpeed);
  
 	## Left movement
 	elif Input.is_action_pressed("ui_left"):
-		## sprite.flip_h = false;
-		## animationPlayer.play("Walk");
 		motion.x = max(motion.x - moveSpeed, -maxSpeed);
 
 	## IdleState
 	else:
-		## animationPlayer.play("Idle");
 		friction = true;
 		
 	## Ground detection
@@ -48,21 +49,22 @@ func _physics_process(delta):
 	## Air friction
 	else:
 		if friction == true:
-			motion.x = lerp(motion.x,0,0.01)
-			
-	motion = move_and_slide(motion,up);
-
-## Tells if player has a magnet
-func hasMagnet():
-	return true;
+			motion.x = lerp(motion.x,0,0.01);
 	
+	motion.y += impulseY;
+	
+	motion = move_and_slide(motion,up);
+	impulseY = 0;
+
 ## Artificial jump
-func jump(acceleration):
-	isGravityAffecting = false;
-	var velocity = Vector2();
-	velocity += Vector2(0, -acceleration);
-	velocity = move_and_slide(velocity)
-	motion.y += velocity.y; 
+func apply_impulse_y(force):
+	print(force);
+	
+	if(force > 0): 
+		impulseY = -jumpHeight * abs(force);
+		return;
+	
+	impulseY = jumpHeight * abs(force); 
 	
 ## Restore physic default values
 func restorePhysics():

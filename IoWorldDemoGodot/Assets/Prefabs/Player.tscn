@@ -10,16 +10,20 @@
 extents = Vector2( 36.5, 48 )
 
 [node name="Player" type="KinematicBody2D"]
-position = Vector2( 649, 0 )
+position = Vector2( 37, 49 )
 script = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+modulate = Color( 0, 0, 0, 0.356863 )
 position = Vector2( -0.5, 0 )
 shape = SubResource( 1 )
 
 [node name="PlayerBody" type="Sprite" parent="."]
 position = Vector2( 0, -2 )
 texture = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="PlayerEyes" type="Sprite" parent="."]
 position = Vector2( 0, -2 )

@@ -23,5 +23,6 @@ light_mask = 0
 position = Vector2( 100, 233 )
 shape = SubResource( 1 )
 
+[connection signal="area_exited" from="." to="." method="_on_MagneticField_area_exited"]
 [connection signal="body_entered" from="." to="." method="_on_MagneticField_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_MagneticField_body_exited"]

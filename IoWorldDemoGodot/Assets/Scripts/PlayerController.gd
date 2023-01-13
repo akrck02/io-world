@@ -1,16 +1,15 @@
 extends KinematicBody2D
 
-const moveSpeed = 300;
-const maxSpeed = 700;
+const moveSpeed : float = float(300);
+const maxSpeed : float = float(700);
 
-const jumpHeight = -2000;
-const up = Vector2(0,-1);
-const gravity = 150;
+const jumpHeight : float = float(-2000);
+const up : Vector2 = Vector2(0,-1);
+const gravity : float = float(150);
 
 var isGravityAffecting = true;
-var motion = Vector2();
-
-var impulseY = 0;
+var motion : Vector2 = Vector2();
+var impulse : Vector2 = Vector2();
 
 
 func _physics_process(_delta):
@@ -51,21 +50,13 @@ func _physics_process(_delta):
 		if friction == true:
 			motion.x = lerp(motion.x,0,0.01);
 	
-	motion.y += impulseY;
-	
+	motion += impulse;
 	motion = move_and_slide(motion,up);
-	impulseY = 0;
+	
+	impulse = Vector2();
 
 ## Artificial jump
-func apply_impulse_y(force):
-	print(force);
+func apply_impulse(force : Vector2):
 	
-	if(force > 0): 
-		impulseY = -jumpHeight * abs(force);
-		return;
-	
-	impulseY = jumpHeight * abs(force); 
-	
-## Restore physic default values
-func restorePhysics():
-	isGravityAffecting = true;
+	## TODO insert here magic jump formula
+	impulse = Vector2(force.x * 3, force.y * 3);

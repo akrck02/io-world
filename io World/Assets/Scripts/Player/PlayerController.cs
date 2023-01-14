@@ -311,10 +311,8 @@ namespace TarodevController {
         [Header("INTERACTION")] [SerializeField]
         private GameObject interactIcon;
         private Vector2 boxSize = new Vector2(1.938797f, 3.20f);
-
-
+        
         void Start() {
-            Debug.Log("start");
             interactIcon.SetActive(false);
         }
 
@@ -327,13 +325,9 @@ namespace TarodevController {
         }
 
         private void CheckInteraction(){
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            RaycastHit2D[] hits = Physics2D.BoxCastAll(player.transform.position, new Vector2(1f, 3.4f), 0, Vector2.zero);
 
-            RaycastHit2D hitlol = Physics2D.Raycast(transform.position, Vector2.left, 5f);
-            Debug.Log(hitlol.collider);
-            Debug.DrawRay(transform.position, Vector2.left * 5f, Color.red);
-
-/* 
-            RaycastHit2D[] hits = Physics2D.BoxCastAll(transform.position, new Vector2(10f, 10f), 0, Vector2.zero);
             if(hits.Length > 0) {
                 foreach (RaycastHit2D hit in hits) {
                     if (hit.IsInteractable()) {
@@ -342,21 +336,16 @@ namespace TarodevController {
                     }
                 }
             }
-*/
 
         }
-
-    
                
-        public void Interact(InputAction.CallbackContext context) {
-               
+        public void Interact(InputAction.CallbackContext context) { 
             if(context.performed) {
                 CheckInteraction();
-            } else if(context.canceled) {
-                Debug.Log("No interact0 time :(");
-            }
-
+            } 
         }
+
+
         #endregion
 
     }

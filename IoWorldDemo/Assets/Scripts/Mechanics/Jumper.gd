@@ -1,6 +1,6 @@
 extends Area2D
 
-export var force: float = 1000;
+export var force: int = 1000;
 export var direction: Vector2 = Vector2();
 
 func _get_direction(rotation : int):
@@ -27,7 +27,7 @@ func _get_direction(rotation : int):
 
 func _on_jumper_body_entered(body):
 	
-	direction = _get_direction(rotation_degrees)
+	direction = _get_direction(int(rotation_degrees));
 	
 	if("Player" != body.name && "Magnet" != body.name):
 		return;

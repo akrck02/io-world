@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Assets/Sprites/Gadgets/RailedPlatformTiles.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Scripts/Rail.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Scripts/Mechanics/Rail.gd" type="Script" id=2]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 100, 0, 100, 100, 0, 100 )
@@ -101,6 +101,9 @@ points = PoolVector2Array( 0, 0, 100, 0, 100, 100, 0, 100 )
 } ]
 3/z_index = 0
 
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 200, 50.5 )
+
 [node name="Rail" type="Node2D"]
 script = ExtResource( 2 )
 
@@ -112,3 +115,11 @@ cell_size = Vector2( 100, 100 )
 cell_custom_transform = Transform2D( 64, 14, 0, 78, 0, 0 )
 format = 1
 tile_data = PoolIntArray( 0, 0, 0, 1, 1, 0, 2, 2, 0, 3, 3, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+show_behind_parent = true
+position = Vector2( 201, 50.5 )
+shape = SubResource( 6 )
+disabled = true
+
+[connection signal="ready" from="." to="." method="_on_Rail_ready"]

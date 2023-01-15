@@ -1,6 +1,6 @@
 extends Area2D
 
-const Direction = preload("Direction.gd");
+const Direction = preload("../Util/Direction.gd");
 
 export var direction : int = 0 setget set_direction;
 export var attract_force = 100 setget set_force;

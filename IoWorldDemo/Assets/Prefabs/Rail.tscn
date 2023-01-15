@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Assets/Sprites/Gadgets/RailedPlatformTiles.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Scripts/Mechanics/Rail.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Scripts/Mechanics/Platform/Rail.gd" type="Script" id=2]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 100, 0, 100, 100, 0, 100 )
@@ -121,5 +121,3 @@ show_behind_parent = true
 position = Vector2( 201, 50.5 )
 shape = SubResource( 6 )
 disabled = true
-
-[connection signal="ready" from="." to="." method="_on_Rail_ready"]

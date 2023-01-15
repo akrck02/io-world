@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const Controls = preload("Mechanics/Controls.gd");
+const Controls = preload("Mechanics/Util/Controls.gd");
 
 const moveSpeed : float = float(300);
 const maxSpeed : float = float(700);

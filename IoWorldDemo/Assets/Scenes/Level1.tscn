@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Assets/Prefabs/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Sprites/Tiles/FactoryTiles.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Assets/Scripts/Debug/Debug.gd" type="Script" id=8]
 [ext_resource path="res://Assets/Prefabs/Rail.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Prefabs/Button.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/Scripts/Levels/lvl2/button1.gd" type="Script" id=11]
 
 [sub_resource type="ConvexPolygonShape2D" id=6]
 points = PoolVector2Array( 0, 0, 100, 0, 100, 100, 0, 100 )
@@ -769,3 +770,4 @@ position = Vector2( 2302, 894 )
 
 [node name="Button" parent="." instance=ExtResource( 10 )]
 position = Vector2( 2540, 1247 )
+behaviour = ExtResource( 11 )

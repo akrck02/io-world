@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/Sprites/Gadgets/MagneticField.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Scripts/Mechanics/MagneticField.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Scripts/Mechanics/Magnetism/MagneticField.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 100.5, 237 )

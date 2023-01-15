@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Assets/Sprites/Gadgets/JumperTiles.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Scripts/Mechanics/Jumper.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Scripts/Mechanics/Jumper/Jumper.gd" type="Script" id=2]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0.465561, 48.5633, 99.5008, 48.1757, 99.8884, 100, 4.14789, 100 )

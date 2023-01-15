@@ -12,6 +12,7 @@ const gravity : float = float(150);
 var isGravityAffecting = true;
 var motion : Vector2 = Vector2();
 var impulse : Vector2 = Vector2();
+var inertia = 100;
 
 
 func _physics_process(_delta):
@@ -49,13 +50,17 @@ func _physics_process(_delta):
 			
 
 	## Air friction
-	else:
-		if friction == true:
+	elif friction == true:
 			motion.x = lerp(motion.x,0,0.1);
 	
-	
 	motion = get_normalized_motion();
-	motion = move_and_slide(motion,up);
+	motion = move_and_slide(motion,up, false, 4, PI/4 ,false);
+	
+	## Adding inertia to collider Rigidbodies
+	for index in get_slide_count():
+		var collision = get_slide_collision(index);
+		if collision.collider.is_in_group("bodies"):
+			collision.collider.apply_central_impulse(-collision.normal * inertia);
 	
 	impulse = Vector2();
 

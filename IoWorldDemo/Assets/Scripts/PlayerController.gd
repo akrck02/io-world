@@ -66,6 +66,10 @@ func _physics_process(_delta):
 
 ## Artificial jump
 func apply_impulse(force : Vector2):
+	
+	if Input.is_action_pressed(Controls.CANCEL):
+		return;
+	
 	impulse = Vector2(force.x * 3, force.y * 3);
 
 

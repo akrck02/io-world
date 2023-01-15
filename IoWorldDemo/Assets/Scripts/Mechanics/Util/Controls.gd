@@ -4,4 +4,5 @@ const UP = "ui_up"
 const RIGHT = "ui_right"
 const DOWN = "ui_down"
 const LEFT = "ui_left"
+const CANCEL = "ui_cancel"
 

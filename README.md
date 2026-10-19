@@ -25,8 +25,13 @@ starts the level again.
 - `assets/sprites/`: io-world's pictures; the jump pad's and the rail's are composed of their tiles.
 - `scenes/level-1b.scene.json`: the same level from io-world's dev branch, with a button that
   starts the rail (in Godot it only printed "hey!") and a cube to push.
+- `scenes/test-level.scene.json`: a short room that tries every mechanic in turn, made by
+  `tools/make_test_level.py`.
+- `scenes/start.scene.json`: the start screen of io-world's first, Unity version (its menu, from
+  the repository's history), made by `tools/make_start_screen.py`; A starts the game.
 - `menu.go`: the 3DS's bottom screen, a menu of the levels made of their own pieces.
-- `player.go`, `jumper.go`, `rail.go`, `button.go`: the behaviours. The magnet is a pushable body and the field
+- `player.go`, `jumper.go`, `rail.go`, `button.go`, `start.go`: the behaviours. The player moves as
+  io-world's controller did, number for number. The magnet is a pushable body and the field
   a trigger with a gravity of its own: no code.
 
 It builds on go-engine's `feature/physics` branch (pushable bodies, platforms and gravity zones,

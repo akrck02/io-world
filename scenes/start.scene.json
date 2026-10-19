@@ -1,0 +1,184 @@
+{
+	"name": "Start screen",
+	"mode": "2d",
+	"sky": "#314d79",
+	"pixelsPerMetre": 40,
+	"nodes": [
+		{
+			"name": "Wallpaper",
+			"position": [
+				0,
+				0,
+				0.0
+			],
+			"rotation": [
+				0,
+				0,
+				0
+			],
+			"scale": [
+				1,
+				1,
+				1
+			],
+			"sprite": "assets/sprites/start/wallpaper.png"
+		},
+		{
+			"name": "Floor",
+			"position": [
+				0,
+				-4.85,
+				0.1
+			],
+			"rotation": [
+				0,
+				0,
+				0
+			],
+			"scale": [
+				1,
+				1,
+				1
+			],
+			"sprite": "assets/sprites/start/floor.png"
+		},
+		{
+			"name": "Lamp",
+			"position": [
+				-6.79,
+				3.91,
+				0.2
+			],
+			"rotation": [
+				0,
+				0,
+				0
+			],
+			"scale": [
+				1,
+				1,
+				1
+			],
+			"sprite": "assets/sprites/start/lamp.png"
+		},
+		{
+			"name": "Logo",
+			"position": [
+				0,
+				1.08,
+				0.3
+			],
+			"rotation": [
+				0,
+				0,
+				0
+			],
+			"scale": [
+				1,
+				1,
+				1
+			],
+			"sprite": "assets/sprites/start/logo.png"
+		},
+		{
+			"name": "Demo",
+			"position": [
+				2.79,
+				0.32,
+				0.4
+			],
+			"rotation": [
+				0,
+				0,
+				0
+			],
+			"scale": [
+				1,
+				1,
+				1
+			],
+			"sprite": "assets/sprites/start/demo.png"
+		},
+		{
+			"name": "Press start",
+			"position": [
+				0,
+				-0.4,
+				0.3
+			],
+			"rotation": [
+				0,
+				0,
+				0
+			],
+			"scale": [
+				1,
+				1,
+				1
+			],
+			"sprite": "assets/sprites/start/press-start.png",
+			"behaviours": [
+				{
+					"name": "StartScreen",
+					"fields": {
+						"first": "scenes/level-1.scene.json",
+						"blink": 0.6
+					}
+				}
+			]
+		},
+		{
+			"name": "Snail",
+			"position": [
+				-5.86,
+				-4.12,
+				0.5
+			],
+			"rotation": [
+				0,
+				0,
+				0
+			],
+			"scale": [
+				1,
+				1,
+				1
+			],
+			"sprite": "assets/sprites/start/snail.png",
+			"behaviours": [
+				{
+					"name": "Snail",
+					"fields": {
+						"speed": 0.075,
+						"rests": 0.25,
+						"distance": 2
+					}
+				}
+			]
+		},
+		{
+			"name": "Camera",
+			"position": [
+				0,
+				0,
+				1
+			],
+			"rotation": [
+				0,
+				0,
+				0
+			],
+			"scale": [
+				1,
+				1,
+				1
+			],
+			"camera": {
+				"projection": "orthographic",
+				"height": 10,
+				"width": 17,
+				"main": true
+			}
+		}
+	]
+}

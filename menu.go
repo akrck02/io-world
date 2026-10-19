@@ -24,16 +24,16 @@ var (
 
 // The menu's measures, in the bottom screen's pixels.
 const (
-	brickBand   = 24
-	faceSide    = 34
-	levelHeight = 40
-	buttonWidth = 52 // a button's face, twice as wide as tall, as its picture
+	brickBand   = 16
+	faceSide    = 30
+	levelHeight = 32
+	buttonWidth = 44 // a button's face, twice as wide as tall, as its picture
 	dripsHeight = 12
-	menuPad     = 10
-	menuGap     = 6
-	titleSize   = 20
-	captionSize = 12
-	levelSize   = 15
+	menuPad     = 8
+	menuGap     = 5
+	titleSize   = 18
+	captionSize = 11
+	levelSize   = 14
 )
 
 // The pictures the menu is made of.
@@ -93,9 +93,12 @@ func bottomScreen(context *ui.Context, menu engine.Menu) {
 		bricks(context)
 		context.Box(ui.Layout{Direction: ui.Vertical, Width: ui.Grow(), Height: ui.Grow(), Padding: ui.Pad(menuPad), Gap: menuGap}, func() {
 			title(context)
-			for _, scene := range menu.Scenes() {
-				level(context, menu, scene)
-			}
+			levels := ui.Layout{Direction: ui.Vertical, Width: ui.Grow(), Height: ui.Grow(), Gap: menuGap}
+			context.ScrollArea("Levels", levels, func() { // more levels than fit scroll under the stylus
+				for _, scene := range menu.Scenes() {
+					level(context, menu, scene)
+				}
+			})
 		})
 		bricks(context)
 	})

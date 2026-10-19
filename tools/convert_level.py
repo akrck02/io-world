@@ -146,8 +146,14 @@ def player(position):
              ("Tail wag", "Player/PlayerTail2.png", "player-tail-2.png"), ("Eyes", "Player/PlayerEyes.png", "player-eyes.png")]
     children = [node(name, metres(0.5, -2), 0.01 * index, sprite=copy(picture, file))
                 for index, (name, picture, file) in enumerate(parts)]
-    return node("Player", metres(*position), 0.6, body={"kind": "moving", "size": [0.73, 0.96], "gravityScale": 9.2},
-                behaviours=[{"name": "Player", "fields": {"speed": 7, "acceleration": 60, "jump": 20}}], children=children)
+    # io-world's controller, per its 60 physics frames a second and 100 pixels a metre: gravity 150
+    # pixels a frame each frame (90 m/s², 9.2 times Earth's), 300 more pixels a frame up to 700
+    # (180 m/s² to 7 m/s), halving its speed each frame on the ground let go and losing a tenth in
+    # the air, jumping at 2000 pixels a second. Kinematic in Godot, fields did not pull it.
+    return node("Player", metres(*position), 0.6,
+                body={"kind": "moving", "size": [0.73, 0.96], "gravityScale": 9.2, "ignoresZones": True},
+                behaviours=[{"name": "Player", "fields": {"speed": 7, "acceleration": 180, "groundKeeps": 0.5,
+                                                          "airKeeps": 0.9, "jump": 20}}], children=children)
 
 
 def jumper(name, position, scale):
@@ -157,7 +163,7 @@ def jumper(name, position, scale):
     return node(name, metres(*centre), 0.5, sprite=compose("Gadgets/JumperTiles.png", [0, 100, 300], "jumper.png"),
                 scale=[scale[0], 1, 1], body={"kind": "solid", "size": [3, 0.6]},
                 children=[node("Pad", metres(0, -35), 0, body={"kind": "trigger", "size": [3, 0.3]},
-                               behaviours=[{"name": "Jumper", "fields": {"speed": 26}}])])
+                               behaviours=[{"name": "Jumper", "fields": {"speed": 30}}])])  # 3 × 1000 pixels a second
 
 
 def rail(position, fields, has_button):
@@ -189,24 +195,27 @@ def button(position):
 
 
 def cube(position):
+    # gravity scale 10 of Godot's 98 pixels a second each second: Earth's
     return node("Cube", metres(*position), 0.55, sprite=copy("Gadgets/CompanionCube.png", "cube.png"),
-                body={"kind": "pushable", "size": [0.87, 0.84]})
+                body={"kind": "pushable", "size": [0.87, 0.84], "gravityScale": 1})
 
 
 def magnet(position):
+    # gravity scale 8 of Godot's 98 pixels a second each second: 7.84 m/s², 0.8 of Earth's
     return node("Magnet", metres(*position), 0.55, sprite=copy("Gadgets/MagnetIdle.png", "magnet.png"),
-                body={"kind": "pushable", "size": [0.66, 0.66]})
+                body={"kind": "pushable", "size": [0.66, 0.66], "gravityScale": 0.8})
 
 
 def field(position, scale):
-    # the prefab's area is 201 by 474 pixels round (100, 233); it pulled up, and the level asked
-    # for left, which never worked in Godot: here it pulls up, as the prefab meant, and the
-    # inspector changes it
+    # the prefab's area is 201 by 474 pixels round (100, 233). It replaced gravity for the bodies
+    # in it (the magnet, the cube: Godot's areas do not pull the kinematic player) with 222 pixels
+    # a second each second towards a point just above its top: up, 2.22 m/s² before the magnet's
+    # gravity scale of 8 (here 0.8 of Earth's, so 22.2 here)
     centre = (position[0] + 100 * scale[0], position[1] + 233 * scale[1])
     picture = node("Glow", metres(0, (251 - 233) * scale[1]), -0.01, sprite=copy("Gadgets/MagneticField.png", "field.png"))
     picture["scale"] = [scale[0], scale[1], 1]
     return node("Field", metres(*centre), 0.3,
-                body={"kind": "trigger", "size": [round(2.01 * scale[0], 4), round(4.74 * scale[1], 4)], "pull": [0, 9.81]},
+                body={"kind": "trigger", "size": [round(2.01 * scale[0], 4), round(4.74 * scale[1], 4)], "pull": [0, 22.2]},
                 children=[picture])
 
 
@@ -240,7 +249,8 @@ def convert():
             nodes.append(magnet(position))
         elif name == "MagneticField":
             nodes.append(field(position, scale))
-    nodes.append(node("Camera", [0, 0], 1, camera={"projection": "orthographic", "height": 10, "width": 16, "main": True,
+    # the 3DS's top screen is 240 pixels tall: six metres of 100-pixel tiles make them 40 pixels
+    nodes.append(node("Camera", [0, 0], 1, camera={"projection": "orthographic", "height": 6, "main": True,
                                                     "follow": "Player", "smoothing": 0.15, "ceiling": True}))
     return {"name": scene_name, "mode": "2d", "sky": SKY, "pixelsPerMetre": PIXELS_PER_METRE, "nodes": nodes}
 

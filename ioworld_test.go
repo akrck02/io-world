@@ -118,16 +118,19 @@ func TestTheRailRisesAndComesBack(test *testing.T) {
 	}
 }
 
-func TestTheFieldLiftsThePlayer(test *testing.T) {
+func TestTheFieldLiftsTheMagnetButNotThePlayer(test *testing.T) {
 	level := levelOne(test)
-	player, field := find(test, level, "Player"), find(test, level, "Field")
+	player, magnet, field := find(test, level, "Player"), find(test, level, "Magnet"), find(test, level, "Field")
 	play(level, frame)
 	centre := field.World().Position
-	putAt(player, centre.X, centre.Y-1)
+	putAt(magnet, centre.X, centre.Y-1)
+	putAt(player, centre.X+1, centre.Y-1)
 	play(level, 0.5)
-	body, _ := player.Body()
-	if player.World().Position.Y <= centre.Y-1 || body.Pull().Y <= 0 {
-		test.Fatalf("in the field the player went to %v, pulled %v: it should rise", player.World().Position.Y, body.Pull())
+	if magnet.World().Position.Y <= centre.Y-1 {
+		test.Fatalf("in the field the magnet went to %v: it should rise", magnet.World().Position.Y)
+	}
+	if player.World().Position.Y >= centre.Y-1 {
+		test.Fatalf("in the field the player went to %v: it should keep falling, as in io-world", player.World().Position.Y)
 	}
 }
 
@@ -159,5 +162,57 @@ func TestTheCubeIsPushed(test *testing.T) {
 	play(level, 1, input.KeyLeft)
 	if moved := start.X - cube.World().Position.X; moved < 0.5 {
 		test.Fatalf("walking into the cube for a second moved it %v metres", moved)
+	}
+}
+
+func TestTheTestLevelTriesEverything(test *testing.T) {
+	level := levelFrom(test, "scenes/test-level.scene.json")
+	player := find(test, level, "Player")
+	play(level, 1)
+	if body, _ := player.Body(); !body.OnFloor() {
+		test.Fatalf("the player stands nowhere at the start, at %v", player.World().Position)
+	}
+	// 2. the pad throws the player above the ledge
+	pad := find(test, level, "Jump pad")
+	putAt(player, pad.World().Position.X, 1.5)
+	highest := 0.0
+	for played := 0.0; played < 1.5; played += frame {
+		play(level, frame)
+		highest = max(highest, player.World().Position.Y)
+	}
+	if highest < 5.5 {
+		test.Fatalf("the pad threw the player up to %v metres, not above the ledge at 5", highest)
+	}
+	// 3. the field lifts the magnet
+	magnet, field := find(test, level, "Magnet"), find(test, level, "Field")
+	putAt(magnet, field.World().Position.X, 1)
+	play(level, 1)
+	if magnet.World().Position.Y < 3 {
+		test.Fatalf("the field lifted the magnet only to %v", magnet.World().Position.Y)
+	}
+	// 4, 5 and 6. the cube on the button starts the rail
+	cube, button, rail := find(test, level, "Cube"), find(test, level, "Button"), find(test, level, "Rail")
+	start := rail.World().Position.Y
+	putAt(cube, button.World().Position.X, 1)
+	play(level, 4)
+	if risen := rail.World().Position.Y - start; risen < 3 {
+		test.Fatalf("with the cube on the button the rail rose %v metres", risen)
+	}
+}
+
+func TestTheStartScreenStartsTheGameOnA(test *testing.T) {
+	start := levelFrom(test, "scenes/start.scene.json")
+	snail := find(test, start, "Snail")
+	from := snail.World().Position.X
+	play(start, 2)
+	if crept := snail.World().Position.X - from; crept <= 0 || crept > 2 {
+		test.Fatalf("in two seconds the snail crept %v metres", crept)
+	}
+	keys := input.NewState()
+	keys.SetKey(input.KeySpace, true)
+	start.Update(frame, keys)
+	next, replaced, err := start.TakeReplacement()
+	if err != nil || !replaced || next.Name != "Level 1" {
+		test.Fatalf("A on the start screen gives %v (replaced: %v, %v), not the first level", next, replaced, err)
 	}
 }

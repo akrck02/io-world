@@ -7,17 +7,23 @@ import (
 	"github.com/akrck02/go-engine/physics"
 )
 
-// Player runs with the arrows (or the 3DS's cross and circle pad), speeding up and slowing down
-// as io-world's did, jumps with Space, the up arrow or the 3DS's A while it stands on its floor
-// (which a gravity field may turn), and starts the level again with Escape or the 3DS's B. Its
-// tail wags while it runs: its children "Tail" and "Tail wag" take turns.
+// Player runs and jumps as io-world's did: the arrows (or the 3DS's cross and circle pad) speed it
+// up quickly to its top speed; let go, it stops at once on the ground and slowly in the air; while
+// Space, the up arrow or the 3DS's A is held and it stands on its floor, it jumps. Escape or the
+// 3DS's B starts the level again. Its tail wags while it runs: its children "Tail" and "Tail wag"
+// take turns.
 type Player struct {
 	Speed        float64 `json:"speed"`        // metres a second, running at most
-	Acceleration float64 `json:"acceleration"` // metres a second each second, speeding up or slowing down
+	Acceleration float64 `json:"acceleration"` // metres a second each second, speeding up
+	GroundKeeps  float64 `json:"groundKeeps"`  // the share of its speed kept each original frame on the ground, let go
+	AirKeeps     float64 `json:"airKeeps"`     // the same, in the air
 	Jump         float64 `json:"jump"`         // metres a second, away from its floor, when it jumps
 
 	wagging float64 // seconds into the tail's wag
 }
+
+// The original's physics ran at this many frames a second: its slowing down is per frame.
+const originalFramesPerSecond = 60
 
 // wagSeconds is how long the tail stays on each side.
 const wagSeconds = 0.15
@@ -33,12 +39,25 @@ func (player *Player) Update(context *engine.Context) {
 		return
 	}
 	direction := context.Input.Move().X
-	body.Velocity.X = toward(body.Velocity.X, direction*player.Speed, player.Acceleration*context.Delta)
-	jumping := context.Input.Pressed(engine.KeySpace) || context.Input.Pressed(engine.KeyUp)
+	player.run(body, direction, context.Delta)
+	jumping := context.Input.Down(engine.KeySpace) || context.Input.Down(engine.KeyUp)
 	if jumping && body.OnFloor() {
 		player.jump(body)
 	}
 	player.wag(context, direction != 0)
+}
+
+// run speeds the player up the way it is pushed, or slows it down when it is not.
+func (player *Player) run(body *physics.Body, direction, seconds float64) {
+	if direction != 0 {
+		body.Velocity.X = toward(body.Velocity.X, direction*player.Speed, player.Acceleration*seconds)
+		return
+	}
+	keeps := player.AirKeeps
+	if body.OnFloor() {
+		keeps = player.GroundKeeps
+	}
+	body.Velocity.X *= math.Pow(keeps, seconds*originalFramesPerSecond)
 }
 
 // jump throws the body away from its floor: against the way its gravity pulls it most.

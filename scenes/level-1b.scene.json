@@ -29,7 +29,7 @@
 				],
 				"pull": [
 					0,
-					9.81
+					22.2
 				]
 			},
 			"children": [
@@ -77,7 +77,8 @@
 				"size": [
 					0.87,
 					0.84
-				]
+				],
+				"gravityScale": 1
 			}
 		},
 		{
@@ -5155,7 +5156,8 @@
 				"size": [
 					0.66,
 					0.66
-				]
+				],
+				"gravityScale": 0.8
 			}
 		},
 		{
@@ -5181,14 +5183,17 @@
 					0.73,
 					0.96
 				],
-				"gravityScale": 9.2
+				"gravityScale": 9.2,
+				"ignoresZones": true
 			},
 			"behaviours": [
 				{
 					"name": "Player",
 					"fields": {
 						"speed": 7,
-						"acceleration": 60,
+						"acceleration": 180,
+						"groundKeeps": 0.5,
+						"airKeeps": 0.9,
 						"jump": 20
 					}
 				}
@@ -5363,7 +5368,7 @@
 						{
 							"name": "Jumper",
 							"fields": {
-								"speed": 26
+								"speed": 30
 							}
 						}
 					]
@@ -5424,7 +5429,7 @@
 						{
 							"name": "Jumper",
 							"fields": {
-								"speed": 26
+								"speed": 30
 							}
 						}
 					]
@@ -5485,7 +5490,7 @@
 						{
 							"name": "Jumper",
 							"fields": {
-								"speed": 26
+								"speed": 30
 							}
 						}
 					]
@@ -5546,7 +5551,7 @@
 						{
 							"name": "Jumper",
 							"fields": {
-								"speed": 26
+								"speed": 30
 							}
 						}
 					]
@@ -5572,8 +5577,7 @@
 			],
 			"camera": {
 				"projection": "orthographic",
-				"height": 10,
-				"width": 16,
+				"height": 6,
 				"main": true,
 				"follow": "Player",
 				"smoothing": 0.15,

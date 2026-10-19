@@ -26,5 +26,5 @@ func main() {
 
 // register registers each behaviour the scenes use, by its type's name.
 func register() {
-	engine.Register(Player{}, Jumper{}, Rail{}, Button{})
+	engine.Register(Player{}, Jumper{}, Rail{}, Button{}, StartScreen{}, Snail{})
 }

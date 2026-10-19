@@ -26,6 +26,9 @@ starts the level again.
 - `player.go`, `jumper.go`, `rail.go`: the behaviours. The magnet is a pushable body and the field
   a trigger with a gravity of its own: no code.
 
+It builds on go-engine's `feature/physics` branch (pushable bodies, platforms and gravity zones,
+not yet in a release), pinned by commit in `go.mod`; it moves to a version once they are in one.
+
 ## AI disclosure
 
 Written by an AI assistant (Claude, by Anthropic) under the author's direction; the pictures are

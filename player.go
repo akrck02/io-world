@@ -4,6 +4,7 @@ import (
 	"math"
 
 	"github.com/akrck02/go-engine/engine"
+	"github.com/akrck02/go-engine/physics"
 )
 
 // Player runs with the arrows (or the 3DS's cross and circle pad), speeding up and slowing down
@@ -35,12 +36,22 @@ func (player *Player) Update(context *engine.Context) {
 	body.Velocity.X = toward(body.Velocity.X, direction*player.Speed, player.Acceleration*context.Delta)
 	jumping := context.Input.Pressed(engine.KeySpace) || context.Input.Pressed(engine.KeyUp)
 	if jumping && body.OnFloor() {
-		body.Velocity.Y = player.Jump
-		if body.Pull().Y > 0 { // pulled up, its floor is above it: it jumps down
-			body.Velocity.Y = -player.Jump
-		}
+		player.jump(body)
 	}
 	player.wag(context, direction != 0)
+}
+
+// jump throws the body away from its floor: against the way its gravity pulls it most.
+func (player *Player) jump(body *physics.Body) {
+	pull := body.Pull()
+	if math.Abs(pull.X) > math.Abs(pull.Y) {
+		body.Velocity.X = -math.Copysign(player.Jump, pull.X)
+		return
+	}
+	body.Velocity.Y = player.Jump
+	if pull.Y > 0 { // pulled up, its floor is above it: it jumps down
+		body.Velocity.Y = -player.Jump
+	}
 }
 
 // toward moves a value toward a target by at most a step.

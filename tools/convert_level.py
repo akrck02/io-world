@@ -178,7 +178,7 @@ def field(position, scale):
     picture = node("Glow", metres(0, (251 - 233) * scale[1]), -0.01, sprite=copy("Gadgets/MagneticField.png", "field.png"))
     picture["scale"] = [scale[0], scale[1], 1]
     return node("Field", metres(*centre), 0.3,
-                body={"kind": "trigger", "size": [round(2.01 * scale[0], 4), round(4.74 * scale[1], 4)], "gravity": [0, 9.81]},
+                body={"kind": "trigger", "size": [round(2.01 * scale[0], 4), round(4.74 * scale[1], 4)], "pull": [0, 9.81]},
                 children=[picture])
 
 

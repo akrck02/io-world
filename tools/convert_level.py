@@ -1,8 +1,10 @@
 """Makes Io World's assets and first level from io-world's Godot 3 project.
 
-One-off tool: python3 tools/convert_level.py ../io-world/IoWorldDemo
+One-off tool: python3 tools/convert_level.py ../io-world/IoWorldDemo "Level 1" scenes/level-1.scene.json
 It copies the pictures the level uses into assets/, composes the jump pad's and the rail's from
-their tiles, writes a tileset file for each tile picture, and writes scenes/level-1.scene.json.
+their tiles, writes a tileset file for each tile picture, and writes the scene. Run on io-world's
+main branch it makes the first level; on its dev branch, the same level with a button that starts
+the rail (in Godot it only printed "hey!") and a cube to push.
 
 Godot measures in pixels with Y down; the scene is in metres, a tile (100 pixels) each, with Y up.
 """
@@ -15,10 +17,11 @@ import sys
 from PIL import Image
 
 PIXELS_PER_METRE = 100
+TILE_NUMBER = 0x1FFFFFFF  # Godot keeps a tile's flips in the bits above its number
 TILE = 100
 SKY = "#4d4d4d"  # Godot's own clear colour, which io-world kept
 
-godot = sys.argv[1]
+godot, scene_name, scene_file = sys.argv[1], sys.argv[2], sys.argv[3]
 level_text = open(os.path.join(godot, "Assets/Scenes/Level1.tscn")).read()
 sprites = os.path.join(godot, "Assets/Sprites")
 os.makedirs("assets/sprites", exist_ok=True)
@@ -71,7 +74,8 @@ def tiles_of(text):
 def cells(tile_data):
     numbers = [int(number) for number in re.findall(r"-?\d+", tile_data)]
     for index in range(0, len(numbers), 3):
-        packed, tile = numbers[index], numbers[index + 1]
+        packed, tile = numbers[index], numbers[index + 1] & TILE_NUMBER  # flipped tiles drawn unflipped
+
         x, y = packed & 0xFFFF, packed >> 16
         if x >= 0x8000:
             x -= 0x10000
@@ -156,13 +160,37 @@ def jumper(name, position, scale):
                                behaviours=[{"name": "Jumper", "fields": {"speed": 26}}])])
 
 
-def rail(position):
-    # the platform's four tiles, riding up and down
+def rail(position, fields, has_button):
+    # the platform's four tiles, riding up and down; the dev branch's rail says its speed and
+    # distance (pixels) and waits 3 seconds at each end; with a button, it waits for it
     centre = (position[0] + 200, position[1] + 50)
+    settings = {"speed": 1.5, "distance": 4}
+    if "distance" in fields:
+        settings = {"speed": abs(float(fields.get("speed", "300"))) / PIXELS_PER_METRE,
+                    "distance": float(fields["distance"]) / PIXELS_PER_METRE, "wait": float(fields.get("wait_time", "3"))}
+    if has_button:
+        settings["startsStill"] = True
     return node("Rail", metres(*centre), 0.5,
                 sprite=compose("Gadgets/RailedPlatformTiles.png", [0, 100, 200, 300], "rail.png"),
                 body={"kind": "platform", "size": [4, 1]},
-                behaviours=[{"name": "Rail", "fields": {"speed": 1.5, "distance": 4}}])
+                behaviours=[{"name": "Rail", "fields": settings}])
+
+
+def button(position):
+    # two frames of 200 by 100 pixels, off and on; it notices what lands on its top
+    sheet = "assets/sprites/button.sprite.json"
+    with open(sheet, "w") as output:
+        json.dump({"picture": copy("Gadgets/ButtonTiles.png", "button.png"), "columns": 2, "rows": 1, "start": "off",
+                   "animations": [{"name": "off", "frames": [0], "framesPerSecond": 1},
+                                  {"name": "on", "frames": [1], "framesPerSecond": 1}]}, output, indent="\t")
+        output.write("\n")
+    return node("Button", metres(*position), 0.5, sprite=sheet, body={"kind": "trigger", "size": [1.56, 0.42]},
+                behaviours=[{"name": "Button", "fields": {"target": "Rail"}}])
+
+
+def cube(position):
+    return node("Cube", metres(*position), 0.55, sprite=copy("Gadgets/CompanionCube.png", "cube.png"),
+                body={"kind": "pushable", "size": [0.87, 0.84]})
 
 
 def magnet(position):
@@ -185,6 +213,7 @@ def field(position, scale):
 def convert():
     tiles = tiles_of(level_text)
     offset, nodes = (0.0, 0.0), []
+    has_button = 'name="Button"' in level_text
     for header, fields in sections(level_text):
         if not header.startswith("node "):
             continue
@@ -202,16 +231,20 @@ def convert():
         elif name.startswith("Jumper"):
             nodes.append(jumper("Jump pad " + (name[len("Jumper"):] or "1"), position, scale))
         elif name == "Rail":
-            nodes.append(rail(position))
+            nodes.append(rail(position, fields, has_button))
+        elif name == "Button":
+            nodes.append(button(position))
+        elif name == "CompanionCube":
+            nodes.append(cube(position))
         elif name == "Magnet":
             nodes.append(magnet(position))
         elif name == "MagneticField":
             nodes.append(field(position, scale))
     nodes.append(node("Camera", [0, 0], 1, camera={"projection": "orthographic", "height": 10, "width": 16, "main": True,
                                                     "follow": "Player", "smoothing": 0.15, "ceiling": True}))
-    return {"name": "Level 1", "mode": "2d", "sky": SKY, "pixelsPerMetre": PIXELS_PER_METRE, "nodes": nodes}
+    return {"name": scene_name, "mode": "2d", "sky": SKY, "pixelsPerMetre": PIXELS_PER_METRE, "nodes": nodes}
 
 
-with open("scenes/level-1.scene.json", "w") as output:
+with open(scene_file, "w") as output:
     json.dump(convert(), output, indent="\t")
     output.write("\n")

@@ -3,7 +3,7 @@
 [io-world](https://github.com/akrck02/io-world)'s first level, a puzzle-platformer made with Godot,
 made again with [Go Engine](https://github.com/akrck02/go-engine) to play on the Nintendo 3DS:
 Io walks and jumps through a factory, bounced by jump pads, carried by a rail, pushing a magnet
-and lifted by a magnetic field.
+and lifted by a magnetic field. The 3DS's bottom screen chooses the level.
 
 **Status:** an experiment, the engine's second example (its proposal 7).
 
@@ -23,7 +23,10 @@ starts the level again.
 - `scenes/level-1.scene.json`: the level, made once from io-world's `Level1.tscn` by
   `tools/convert_level.py`, then edited in the editor.
 - `assets/sprites/`: io-world's pictures; the jump pad's and the rail's are composed of their tiles.
-- `player.go`, `jumper.go`, `rail.go`: the behaviours. The magnet is a pushable body and the field
+- `scenes/level-1b.scene.json`: the same level from io-world's dev branch, with a button that
+  starts the rail (in Godot it only printed "hey!") and a cube to push.
+- `menu.go`: the 3DS's bottom screen, a menu of the levels made of their own pieces.
+- `player.go`, `jumper.go`, `rail.go`, `button.go`: the behaviours. The magnet is a pushable body and the field
   a trigger with a gravity of its own: no code.
 
 It builds on go-engine's `feature/physics` branch (pushable bodies, platforms and gravity zones,

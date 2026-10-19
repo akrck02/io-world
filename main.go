@@ -18,6 +18,7 @@ var files embed.FS
 
 func main() {
 	register()
+	engine.SetBottomScreen(bottomScreen)
 	if err := engine.Run(files); err != nil {
 		log.Fatal(err)
 	}
@@ -25,5 +26,5 @@ func main() {
 
 // register registers each behaviour the scenes use, by its type's name.
 func register() {
-	engine.Register(Player{}, Jumper{}, Rail{})
+	engine.Register(Player{}, Jumper{}, Rail{}, Button{})
 }

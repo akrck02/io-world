@@ -1,0 +1,22 @@
+{
+	"picture": "assets/sprites/button.png",
+	"columns": 2,
+	"rows": 1,
+	"start": "off",
+	"animations": [
+		{
+			"name": "off",
+			"frames": [
+				0
+			],
+			"framesPerSecond": 1
+		},
+		{
+			"name": "on",
+			"frames": [
+				1
+			],
+			"framesPerSecond": 1
+		}
+	]
+}

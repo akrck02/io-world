@@ -19,8 +19,11 @@ func TestMain(main *testing.M) {
 }
 
 // levelOne loads the first level and starts it, failing on any problem.
-func levelOne(test *testing.T) *engine.Scene {
-	loaded, err := engine.Load(os.DirFS("."), "scenes/level-1.scene.json")
+func levelOne(test *testing.T) *engine.Scene { return levelFrom(test, "scenes/level-1.scene.json") }
+
+// levelFrom loads a level's file and starts it, failing on any problem.
+func levelFrom(test *testing.T, file string) *engine.Scene {
+	loaded, err := engine.Load(os.DirFS("."), file)
 	if err != nil {
 		test.Fatal(err)
 	}
@@ -125,5 +128,36 @@ func TestTheFieldLiftsThePlayer(test *testing.T) {
 	body, _ := player.Body()
 	if player.World().Position.Y <= centre.Y-1 || body.Pull().Y <= 0 {
 		test.Fatalf("in the field the player went to %v, pulled %v: it should rise", player.World().Position.Y, body.Pull())
+	}
+}
+
+func TestTheButtonStartsTheRailThatWaits(test *testing.T) {
+	level := levelFrom(test, "scenes/level-1b.scene.json")
+	rail, button, player := find(test, level, "Rail"), find(test, level, "Button"), find(test, level, "Player")
+	start := rail.World().Position.Y
+	play(level, 2)
+	if moved := rail.World().Position.Y - start; moved > 1e-6 {
+		test.Fatalf("before the button is pressed the rail moved %v metres", moved)
+	}
+	putAt(player, button.World().Position.X, button.World().Position.Y+1)
+	play(level, 1)
+	play(level, 3)
+	if risen := rail.World().Position.Y - start; risen < 2 {
+		test.Fatalf("pressed, the button did not start the rail: it rose %v metres", risen)
+	}
+}
+
+func TestTheCubeIsPushed(test *testing.T) {
+	level := levelFrom(test, "scenes/level-1b.scene.json")
+	player, cube := find(test, level, "Player"), find(test, level, "Cube")
+	play(level, 1)
+	feet := player.World().Position
+	putAt(cube, feet.X-2, feet.Y) // on the floor where the player stands: where it starts, it bounces on a pad
+	play(level, 1)
+	start := cube.World().Position
+	putAt(player, start.X+1.2, start.Y+0.1)
+	play(level, 1, input.KeyLeft)
+	if moved := start.X - cube.World().Position.X; moved < 0.5 {
+		test.Fatalf("walking into the cube for a second moved it %v metres", moved)
 	}
 }

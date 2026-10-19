@@ -1,5 +1,5 @@
-github.com/akrck02/go-engine v0.0.2-0.20261019214703-7191913ffe22 h1:52PIkMgdo5rLTP6Z6nb1s9DsboPt7gs8iL/2wRQ4Lrw=
-github.com/akrck02/go-engine v0.0.2-0.20261019214703-7191913ffe22/go.mod h1:2B4l/1cDfg8gPuefk9uF1ba6JA7wtIShGmDIpdMaM/c=
+github.com/akrck02/go-engine v0.0.2-0.20261019220204-cf37461fc6f8 h1:ZhVXFZ5n94ySThOc0f3bxyWSvs/yN+xyaXmITOrSRl4=
+github.com/akrck02/go-engine v0.0.2-0.20261019220204-cf37461fc6f8/go.mod h1:2B4l/1cDfg8gPuefk9uF1ba6JA7wtIShGmDIpdMaM/c=
 github.com/akrck02/go-renderer v0.1.0 h1:XcuTMfi8P0+69nnNxjZZ+ytQ4DL1ulMiLZU3oHluXxw=
 github.com/akrck02/go-renderer v0.1.0/go.mod h1:Z835tJYTrI/B+rxk5BbIMsDFokk+P36R8kZ0CVbEZzA=
 github.com/akrck02/go-scene-builder v0.1.0 h1:qR+MsHtcmDhiYfaICQurwWpFapAFPgTfTVgNMczQb1U=

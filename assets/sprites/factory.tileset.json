@@ -1,0 +1,9 @@
+{
+	"picture": "assets/sprites/factory.png",
+	"tileSize": 100,
+	"solid": [
+		1,
+		2,
+		3
+	]
+}

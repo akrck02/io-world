@@ -1,0 +1,21 @@
+{
+	"picture": "assets/sprites/attractor.png",
+	"tileSize": 100,
+	"solid": [
+		1,
+		6,
+		8,
+		11,
+		13,
+		16,
+		17,
+		18,
+		20,
+		24,
+		25,
+		26,
+		27,
+		28,
+		29
+	]
+}

@@ -1,9 +1,9 @@
 """Makes Io World's assets and first level from io-world's Godot 3 project.
 
-One-off tool: python3 tools/convert_level.py ../io-world/IoWorldDemo "Level 1" scenes/level-1.scene.json
+One-off tool, from IoWorldGo/: python3 tools/convert_level.py ../IoWorldDemo "Level 1" scenes/level-1.scene.json
 It copies the pictures the level uses into assets/, composes the jump pad's and the rail's from
 their tiles, writes a tileset file for each tile picture, and writes the scene. Run on io-world's
-main branch it makes the first level; on its dev branch, the same level with a button that starts
+main branch it makes the first level; on its dev branch (checked out elsewhere), the same level with a button that starts
 the rail (in Godot it only printed "hey!") and a cube to push.
 
 Godot measures in pixels with Y down; the scene is in metres, a tile (100 pixels) each, with Y up.

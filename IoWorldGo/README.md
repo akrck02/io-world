@@ -1,7 +1,7 @@
 # Io World
 
-[io-world](https://github.com/akrck02/io-world)'s first level, a puzzle-platformer made with Godot,
-made again with [Go Engine](https://github.com/akrck02/go-engine) to play on the Nintendo 3DS:
+Io World's first level (the Godot game in `../IoWorldDemo`), made again with
+[Go Engine](https://github.com/akrck02/go-engine) to play on the Nintendo 3DS:
 Io walks and jumps through a factory, bounced by jump pads, carried by a rail, pushing a magnet
 and lifted by a magnetic field. The 3DS's bottom screen chooses the level.
 
@@ -34,8 +34,8 @@ starts the level again.
   io-world's controller did, number for number. The magnet is a pushable body and the field
   a trigger with a gravity of its own: no code.
 
-It builds on go-engine's `feature/physics` branch (pushable bodies, platforms and gravity zones,
-not yet in a release), pinned by commit in `go.mod`; it moves to a version once they are in one.
+It builds on go-engine's `dev` branch (pushable bodies, platforms, gravity zones and lights, on
+their way to v0.0.3), pinned by commit in `go.mod`; it moves to the version once it is out.
 
 ## AI disclosure
 

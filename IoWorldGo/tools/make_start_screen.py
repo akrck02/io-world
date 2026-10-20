@@ -1,7 +1,8 @@
 """Makes Io World's start screen from io-world's Unity menu (MainMenu.unity), as it was in the
 repository's history before io-world moved to Godot.
 
-python3 tools/make_start_screen.py ../io-world 713b9d1
+python3 tools/make_start_screen.py .. 713b9d1   (from IoWorldGo/: this repository, at the commit
+before io-world moved to Godot)
 Unity placed each picture with a scale, at 100 pixels a unit; here each is resized to the size it
 showed at, 40 pixels a metre (the 3DS's top screen shows 24), so none is larger than it is drawn.
 

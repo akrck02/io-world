@@ -1,4 +1,4 @@
-module github.com/akrck02/go-engine-io-world
+module github.com/akrck02/io-world/IoWorldGo
 
 go 1.25.6
 

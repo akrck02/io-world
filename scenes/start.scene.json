@@ -78,7 +78,33 @@
 				1,
 				1
 			],
-			"sprite": "assets/sprites/start/logo.png"
+			"sprite": "assets/sprites/start/logo.png",
+			"children": [
+				{
+					"name": "Logo glow",
+					"position": [
+						0.0,
+						-0.08,
+						0
+					],
+					"rotation": [
+						0,
+						0,
+						0
+					],
+					"scale": [
+						1.0,
+						0.914,
+						1
+					],
+					"sprite": "assets/sprites/start/logo.png",
+					"light": {
+						"colour": "#ffffff",
+						"intensity": 1.0,
+						"kind": "sprite"
+					}
+				}
+			]
 		},
 		{
 			"name": "Demo",
@@ -125,6 +151,32 @@
 						"blink": 0.6
 					}
 				}
+			],
+			"children": [
+				{
+					"name": "Press start glow",
+					"position": [
+						0.0,
+						-0.01,
+						0
+					],
+					"rotation": [
+						0,
+						0,
+						0
+					],
+					"scale": [
+						1.0,
+						1.0,
+						1
+					],
+					"sprite": "assets/sprites/start/press-start.png",
+					"light": {
+						"colour": "#ffffff",
+						"intensity": 1.0,
+						"kind": "sprite"
+					}
+				}
 			]
 		},
 		{
@@ -154,7 +206,108 @@
 						"distance": 2
 					}
 				}
+			],
+			"children": [
+				{
+					"name": "Snail glow",
+					"position": [
+						0.0,
+						0.004,
+						0
+					],
+					"rotation": [
+						0,
+						0,
+						0
+					],
+					"scale": [
+						1.0,
+						1.0,
+						1
+					],
+					"sprite": "assets/sprites/start/snail.png",
+					"light": {
+						"colour": "#ffffff",
+						"intensity": 1.0,
+						"kind": "sprite"
+					}
+				}
 			]
+		},
+		{
+			"name": "Lamp light",
+			"position": [
+				-6.8,
+				4.03,
+				0.6
+			],
+			"rotation": [
+				0,
+				0,
+				0
+			],
+			"scale": [
+				1,
+				1,
+				1
+			],
+			"light": {
+				"colour": "#faffa0",
+				"intensity": 1.0,
+				"kind": "point",
+				"inner": 0.507,
+				"outer": 3.552
+			}
+		},
+		{
+			"name": "Small light 1",
+			"position": [
+				4.19,
+				-4.239,
+				0.6
+			],
+			"rotation": [
+				0,
+				0,
+				0
+			],
+			"scale": [
+				1,
+				1,
+				1
+			],
+			"light": {
+				"colour": "#ffffff",
+				"intensity": 1.0,
+				"kind": "point",
+				"inner": 0,
+				"outer": 1.17
+			}
+		},
+		{
+			"name": "Small light 2",
+			"position": [
+				4.212,
+				-4.266,
+				0.6
+			],
+			"rotation": [
+				0,
+				0,
+				0
+			],
+			"scale": [
+				1,
+				1,
+				1
+			],
+			"light": {
+				"colour": "#ffffff",
+				"intensity": 1.0,
+				"kind": "point",
+				"inner": 0,
+				"outer": 1.05
+			}
 		},
 		{
 			"name": "Camera",
@@ -180,5 +333,9 @@
 				"main": true
 			}
 		}
-	]
+	],
+	"ambient": {
+		"colour": "#ffffff",
+		"intensity": 0.72
+	}
 }

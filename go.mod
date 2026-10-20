@@ -3,8 +3,8 @@ module github.com/akrck02/go-engine-io-world
 go 1.25.6
 
 require (
-	github.com/akrck02/go-engine v0.0.2-0.20261019220744-b2bcc7c0e46b
-	github.com/akrck02/go-renderer v0.1.0
+	github.com/akrck02/go-engine v0.0.2-0.20261020061807-af3d4f089042
+	github.com/akrck02/go-renderer v0.1.1-0.20261020060749-91bd11f6d787
 	github.com/akrck02/go-ui v0.1.1
 )
 

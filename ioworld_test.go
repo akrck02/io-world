@@ -4,9 +4,11 @@ import (
 	"os"
 	"testing"
 
+	"github.com/akrck02/go-renderer/draw2d"
 	"github.com/akrck02/go-renderer/input"
 
 	"github.com/akrck02/go-engine/engine"
+	"github.com/akrck02/go-engine/scenefile"
 	"github.com/akrck02/go-engine/space"
 )
 
@@ -214,5 +216,26 @@ func TestTheStartScreenStartsTheGameOnA(test *testing.T) {
 	next, replaced, err := start.TakeReplacement()
 	if err != nil || !replaced || next.Name != "Level 1" {
 		test.Fatalf("A on the start screen gives %v (replaced: %v, %v), not the first level", next, replaced, err)
+	}
+}
+
+func TestTheStartScreenIsLitAsTheUnityMenuWas(test *testing.T) {
+	start := levelFrom(test, "scenes/start.scene.json")
+	if start.Ambient == nil || start.Ambient.Strength() != 0.72 {
+		test.Fatalf("the ambient is %+v; wanted Unity's global light at 0.72", start.Ambient)
+	}
+	lamp, found := find(test, start, "Lamp light").Light()
+	if !found || lamp.Kind != scenefile.PointLight || lamp.Colour != "#faffa0" {
+		test.Fatalf("the lamp's light is %+v", lamp)
+	}
+	for _, glow := range []string{"Logo/Logo glow", "Press start/Press start glow", "Snail/Snail glow"} {
+		if light, found := find(test, start, glow).Light(); !found || light.Kind != scenefile.SpriteLight {
+			test.Errorf("%s does not shine through its picture: %+v", glow, light)
+		}
+	}
+	var list draw2d.List
+	start.Draw2D(&list, draw2d.Rect{Width: 400, Height: 240}, start.View2D())
+	if last := list.Commands[len(list.Commands)-1]; last.Kind != draw2d.LightingKind {
+		test.Fatalf("the start screen ends with %v, not its lighting", last.Kind)
 	}
 }

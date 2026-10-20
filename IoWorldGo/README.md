@@ -34,8 +34,7 @@ starts the level again.
   io-world's controller did, number for number. The magnet is a pushable body and the field
   a trigger with a gravity of its own: no code.
 
-It builds on go-engine's `dev` branch (pushable bodies, platforms, gravity zones and lights, on
-their way to v0.0.3), pinned by commit in `go.mod`; it moves to the version once it is out.
+It builds on Go Engine v0.0.3 (pushable bodies, platforms, gravity zones and lights).
 
 ## AI disclosure
 

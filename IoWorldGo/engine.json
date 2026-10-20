@@ -1,0 +1,5 @@
+{
+	"name": "Io World",
+	"startScene": "scenes/start.scene.json",
+	"sceneMenu": true
+}

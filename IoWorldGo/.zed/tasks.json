@@ -1,0 +1,7 @@
+[
+	{
+		"label": "Play",
+		"command": "go run .",
+		"use_new_terminal": false
+	}
+]

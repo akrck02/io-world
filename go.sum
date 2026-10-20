@@ -1,7 +1,7 @@
-github.com/akrck02/go-engine v0.0.2-0.20261020061807-af3d4f089042 h1:GtqK984EpcjBWR/xJreo63zJk1OCdzWkPC/JwWYeIJs=
-github.com/akrck02/go-engine v0.0.2-0.20261020061807-af3d4f089042/go.mod h1:7rKU+SFij0v2D26qnCKhSqyChpUjtOXQ+YFdGaY98ug=
-github.com/akrck02/go-renderer v0.1.1-0.20261020060749-91bd11f6d787 h1:PTDV2jNUk3E/+I9SVoDnNviYMCt4BGK3hVkjtD+qAGQ=
-github.com/akrck02/go-renderer v0.1.1-0.20261020060749-91bd11f6d787/go.mod h1:Z835tJYTrI/B+rxk5BbIMsDFokk+P36R8kZ0CVbEZzA=
+github.com/akrck02/go-engine v0.0.2-0.20261020065923-4f0984b9bd9d h1:c5JipaRmpJrX6ncYbn3kGnGT95w1JhY/xTxhWiXlFoE=
+github.com/akrck02/go-engine v0.0.2-0.20261020065923-4f0984b9bd9d/go.mod h1:AtY+i62dO6beCvvOmRpE+l+9cz3FQt4m/wZe/Oi7udE=
+github.com/akrck02/go-renderer v0.1.1-0.20261020065609-d4a411b99c13 h1:NA3EsKnYLB7O29DdgsGC9OW2qLCwcux8sZ4zdBxI0kQ=
+github.com/akrck02/go-renderer v0.1.1-0.20261020065609-d4a411b99c13/go.mod h1:Z835tJYTrI/B+rxk5BbIMsDFokk+P36R8kZ0CVbEZzA=
 github.com/akrck02/go-scene-builder v0.1.0 h1:qR+MsHtcmDhiYfaICQurwWpFapAFPgTfTVgNMczQb1U=
 github.com/akrck02/go-scene-builder v0.1.0/go.mod h1:/o6DN0ehHZoOa1tBdBanz93gO2QAQzQ1f9dxOLN5ap0=
 github.com/akrck02/go-ui v0.1.1 h1:0doyqtJqZqjOXo1qOjshAkR/hxPZYg7BBPq/rXlgEr0=
